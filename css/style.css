@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+/* ========================================
+   THEME-SYSTEM – MIT LIGHT / DARK / SEPIA
+   ======================================== */
+
+/* 1. Logische Farbvariablen – NIEMALS direkt Farben hier!
+   Diese werden im gesamten CSS verwendet (z.B. var(--bg)) */
+:root {
+    --bg: var(--theme-bg);
+    --text: var(--theme-text);
+    --accent: var(--theme-accent);
+    --card-bg: var(--theme-card-bg);
+    --border: var(--theme-border);
+}
+
+/* LIGHT THEME */
+:root {
+    --theme-bg: oklch(100% 0 0); /* Reines Weiß */
+    --theme-text: oklch(15% 0 0); /* Tiefes Schwarz (nicht zu hart) */
+    --theme-accent: oklch(62.3% 0.214 259.815); /* Lebhaftes Blau */
+    --theme-card-bg: oklch(98% 0 0); /* Fast weiß */
+    --theme-border: oklch(90% 0 0); /* Helles Grau */
+}
+
+/* DARK THEME */
+:root[data-theme="dark"] {
+    --theme-bg: oklch(12% 0 0); /* Tiefes Grau (nicht rein schwarz → weniger Augenbelastung) */
+    --theme-text: oklch(96% 0 0); /* Helles Grau (nicht rein weiß → blendet weniger) */
+    --theme-accent: oklch(70% 0.22 240); /* Weiches Blau */
+    --theme-card-bg: oklch(16% 0 0); /* Etwas heller als Hintergrund */
+    --theme-border: oklch(25% 0 0); /* Subtiles Grau */
+}
+
+/* SEPIA THEME */
+:root[data-theme="sepia"] {
+    --theme-bg: oklch(96% 0.03 70); /* Warmes Papier-Weiß */
+    --theme-text: oklch(30% 0.05 70); /* Dunkles Braun */
+    --theme-accent: oklch(60% 0.12 60); /* Erdiges Goldbraun */
+    --theme-card-bg: oklch(99% 0.02 70); /* Helleres Sepia */
+    --theme-border: oklch(85% 0.04 70); /* Weiches Braungrau */
+}
+
+/* 5. AUTOMATISCHES DARK THEME (nur wenn Nutzer noch kein Theme gewählt hat) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --theme-bg: oklch(12% 0 0); /* Tiefes Grau (nicht rein schwarz → weniger Augenbelastung) */
+        --theme-text: oklch(96% 0 0); /* Helles Grau (nicht rein weiß → blendet weniger) */
+        --theme-accent: oklch(70% 0.22 240); /* Weiches Blau */
+        --theme-card-bg: oklch(16% 0 0); /* Etwas heller als Hintergrund */
+        --theme-border: oklch(25% 0 0); /* Subtiles Grau */
+    }
+}
+
+/* ========================================
+   GLOBALE STYLES – NUR LOGISCHE VARIABLEN NUTZEN!
+   ======================================== */
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
+}
+
+button {
+    background: var(--accent);
+}
